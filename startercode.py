@@ -146,7 +146,33 @@ def get_longest_lifespan_breed(cache_file):
         A tuple (breed_name, max_lifespan_integer) for the winning breed, OR the
         string "No breeds found" if no breed in the cache has a life.max value.
     """
-    pass
+    cache = load_json(cache_file)
+
+    best_name = None
+    best_life = -1
+
+    for entry in cache.values():
+        try:
+            attributes = entry["data"]["attributes"]
+            name = attributes.get("name")
+            life = attributes.get("life", {})
+            max_life = life.get("max")
+
+            if isinstance(max_life, int):
+                if max_life > best_life:
+                    best_life = max_life
+                    best_name = name
+                elif max_life == best_life and name is not None:
+                    if best_name is None or name < best_name:
+                        best_name = name
+        except:
+            continue
+
+    if best_name is None:
+        return "No breeds found"
+
+    return (best_name, best_life)
+
 
 
 def get_groups_above_cutoff(cutoff, cache_file):
@@ -165,7 +191,19 @@ def get_groups_above_cutoff(cutoff, cache_file):
     RETURNS:
         A dictionary {group_uuid: count} for groups with count >= cutoff only.
     """
-    pass
+    cache = load_json(cache_file)
+    group_counts = {}
+
+    for entry in cache.values():
+        try:
+            group_id = entry["data"]["relationships"]["group"]["data"]["id"]
+            if group_id is not None:
+                group_counts[group_id] = group_counts.get(group_id, 0) + 1
+        except:
+            continue
+
+    result = {group_id: count for group_id, count in group_counts.items() if count >= cutoff}
+    return result
 
 
 # Extra Credit
@@ -189,7 +227,7 @@ def recommend_breeds_in_same_group(breed_name, cache_file):
             "No group information available for '{breed_name}'."  (no group id)
             "No recommendations found based on '{breed_name}'."  (no other breeds in that group)
     """
-
+    
 
 class TestHomeworkDogAPI(unittest.TestCase):
     def setUp(self):
