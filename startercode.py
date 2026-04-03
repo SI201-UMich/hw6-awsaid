@@ -2,13 +2,13 @@
 # Your name: Antonio Said
 # Your student id:7851 9368
 # Your email: awsaid@umich.edu
-# Who or what you worked with on this homework (including generative AI like ChatGPT):
+# Who or what you worked with on this homework (including generative AI like ChatGPT): discussed with classmates briefly, Chatgpt
 # If you worked with generative AI also add a statement for how you used it.
-# e.g.:
+# e.g.: 
 # Asked ChatGPT for help debugging and understanding the JSON structure
-#
+# I used AI for places where I was stuck. This was mainly update cache, that function gave me a lot of trouble.
 # Did your use of GenAI on this assignment align with your goals and guidelines in your Gen AI contract? If not, why?
-#
+# My use did line up. I only used AI on portions where I was stuck and needed help with debugging or clarification.
 # --- ARGUMENTS & EXPECTED RETURN VALUES PROVIDED --- #
 # --- SEE INSTRUCTIONS FOR FULL DETAILS ON METHOD IMPLEMENTATION --- #
 
